@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+
+package thumbnail;
+
+
+import "google/api/annotations.proto";
+
+
+option go_package ="pkg/thumbnail;thumbnail";
+
+
+service ThumbnailApiService{
+    rpc GetThumbnail(GetThumbnailRequset) returns (stream GetThumbnailResponse){
+        option (google.api.http) = {
+            post: "/thumbnail",
+            body: "*"
+        };
+    }
+}
+
+message GetThumbnailRequset{
+     string url = 1;
+}
+
+message GetThumbnailResponse{
+    bytes thumbnail = 1;
+     string filename = 2;
+}
